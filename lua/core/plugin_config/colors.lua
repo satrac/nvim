@@ -12,6 +12,7 @@ require('onedark').setup {
     transparent = true, -- lualine center bar transparency
   },
   toggle_style_key = '<leader>ts',
+  toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'},
 }
 require('onedark').load()
 
