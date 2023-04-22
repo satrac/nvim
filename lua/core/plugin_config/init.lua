@@ -1,3 +1,4 @@
+
 require("core.plugin_config.colors")
 require("core.plugin_config.fugitive")
 require("core.plugin_config.harpoon")
