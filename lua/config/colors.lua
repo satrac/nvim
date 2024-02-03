@@ -2,7 +2,7 @@
 vim.opt.background = "dark"
 -- vim.opt.background = "light"
 
--- vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "catppuccin"
 -- vim.cmd.colorscheme "catppuccin-latte"
 -- vim.cmd.colorscheme "catppuccin-frappe"
 -- vim.cmd.colorscheme "catppuccin-macchiato"
@@ -60,7 +60,7 @@ vim.opt.background = "dark"
 
 
 -- kimbox kimbie dark theme
-vim.cmd.colorscheme "kimbox"
+-- vim.cmd.colorscheme "kimbox"
 
 -- modus themes
 -- vim.cmd.colorscheme "modus"
