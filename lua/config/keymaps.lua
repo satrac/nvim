@@ -1,4 +1,5 @@
 local keymap = vim.keymap
+local opts = { noremap = true, silent = true }
 
 -- This is going to get me cancelled
 keymap.set("i", "<C-c>", "<Esc>")
@@ -35,10 +36,26 @@ keymap.set('n', '<C-u>', '<C-u>zz')
 keymap.set({ 'n', 'v'}, '<PageUp>', '<C-u>')
 keymap.set({ 'n', 'v'}, '<PageDown>', '<C-d>')
 
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
+
+-- fix home/end keys in all modes
+--nmap OH <home>
+--cmap OH <home>
+--imap OH <home>
+--" move cursor one more char to right in normal mode
+--nmap OF <end>l
+--cmap OF <end>
+--imap OF <end>
+
+
+--" move cursor one more char to right in normal mode
+--nmap OF <end>l
+--cmap OF <end>
+--imap OF <end>
 
 
 -- Insert mode: emacs-like navigation (Ctrl-A, Ctrl-E)
@@ -51,29 +68,70 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 -- Quick map to normal mode from insert mode
 --vim.keymap.set('i', ';;', '<Esc>')
 
--- Keep navigation centred
--- vim.keymap.set('n', 'n', 'nzzzv')
--- vim.keymap.set('n', 'N', 'Nzzzv')
+-- Keep navigation centered while searching
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+
 -- vim.keymap.set('n', 'G', 'Gzz')
 
 -- Buffer keymaps
-vim.keymap.set('n', '<leader>bn', ':bn<CR>', { desc = '[B]uffer [N]ext' })
-vim.keymap.set('n', '<leader>bp', ':bp<CR>', { desc = '[B]uffer [P]revious' })
-vim.keymap.set('n', '<leader>bd', ':bd<CR>', { desc = '[B]uffer [D]elete' })
+keymap.set('n', '<leader>bn', ':bn<CR>', { desc = '[B]uffer [N]ext' })
+keymap.set('n', '<leader>bp', ':bp<CR>', { desc = '[B]uffer [P]revious' })
+keymap.set('n', '<leader>bd', ':bd<CR>', { desc = '[B]uffer [D]elete' })
+
+-- Navigate vim panes better
+-- already set in tmux-navigator
+--keymap.set('n', '<c-k>', ':wincmd k<CR>')
+--keymap.set('n', '<c-j>', ':wincmd j<CR>')
+--keymap.set('n', '<c-h>', ':wincmd h<CR>')
+--keymap.set('n', '<c-l>', ':wincmd l<CR>')
+
+keymap.set('n', '<leader>h', ':nohlsearch<CR>')
+
+-- window management
+keymap.set("n", "<leader>sv", ":vsplit<CR>", opts)
+keymap.set("n", "<leader>sh", ":split<CR>", opts)
+keymap.set('n', '<Leader>sm', "<Cmd>lua require('maximize').toggle()<CR>", opts)
+
+-- Indenting
+keymap.set("v", "<", "<gv")
+keymap.set("v", ">", ">gv")
+
+-- commenting
+-- uses a comments plugin
+keymap.set({"n", "v"}, "<C-_>", "gcc", { noremap = false })
+
+-- allow '-' to open the parent directory in netrw
+--nnoremap <silent> - :e %:h<cr>
+vim.keymap.set("n", "-", ":e %:h<CR>", { noremap = true, silent = true })
 
 
+-- Use Shift H and Shift L to move to beginning and end of line
+vim.keymap.set("n", "<s-h>", "0", { noremap = true })
+vim.keymap.set("n", "<s-l>", "$l", { noremap = true })
 
+
+-- increment/decrement
+vim.keymap.set("n", "+", "<C-a>", { noremap = true })
+vim.keymap.set("n", "-", "<C-x>", { noremap = true })
+
+-- Select all
+vim.keymap.set("n", "<C-a>", "gg<S-v>G")
+
+-- move cursor to empty space at end of line
+vim.opt.virtualedit:append("onemore")
+vim.keymap.set("n", "$", "$l", { noremap = true })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
+    callback = function()
+	vim.highlight.on_yank()
+    end,
+    group = highlight_group,
+    pattern = '*',
 })
 
 

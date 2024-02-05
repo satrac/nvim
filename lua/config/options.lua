@@ -1,12 +1,5 @@
 
 
--- Navigate vim panes better
-vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
-vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
-vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
-vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
-
-vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 
 local opt = vim.opt
 
@@ -50,7 +43,7 @@ opt.smartcase = true
 opt.showmatch = true
 
 -- show the status line all the time
-opt.laststatus=2 
+opt.laststatus=2
 
 
 -- line numbers
@@ -60,6 +53,7 @@ opt.number = true
 
 -- make sure your terminal supports this
 opt.termguicolors = true
+
 
 -- enable syntax colors
 opt.syntax = "enable"
@@ -119,8 +113,8 @@ opt.autochdir = false
 
 
 -- Set completeopt to have a better completion experience
---vim.o.completeopt = 'menuone,noselect'
-vim.o.completeopt = 'menuone,noinsert,noselect'
+vim.o.completeopt = 'menuone,noselect'
+--vim.o.completeopt = 'menuone,noinsert,noselect'
 
 -- folds
 opt.foldmethod = "expr"
